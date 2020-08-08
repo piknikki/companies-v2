@@ -2,14 +2,24 @@
   <nav class="navbar" role="navigation" aria-label="main navigation">
     <div class="navbar-brand">
       <a class="navbar-item" href="https://bulma.io">
-        <router-link to="/" class="is-transparent"><h1>FakeCompanies Manager</h1></router-link>
+        <router-link to="/" class="is-transparent">
+          <div class="title is-primary">FakeCompanies Manager</div>
+        </router-link>
       </a>
-
-      <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
-        <span aria-hidden="true"></span>
-        <span aria-hidden="true"></span>
-        <span aria-hidden="true"></span>
-      </a>
+    </div>
+    <div class="navbar-menu">
+      <div class="navbar-end">
+        <router-link to="/new" id="plus-btn" class="button is-primary is-rounded">
+          <i class="fa fa-plus"></i>
+        </router-link>
+      </div>
     </div>
   </nav>
 </template>
+
+<style>
+.navbar {
+  padding: 50px 100px;
+  height: 3rem;
+}
+</style>
