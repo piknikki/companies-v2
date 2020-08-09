@@ -8,7 +8,7 @@
       </a>
     </div>
     <div class="navbar-menu">
-      <div class="navbar-end">
+      <div class="navbar-end" v-if="this.$route.name !== 'new'">
         <router-link to="/new" id="plus-btn" class="button is-primary is-rounded">
           <i class="fa fa-plus"></i>
         </router-link>
