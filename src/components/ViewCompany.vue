@@ -29,7 +29,7 @@
       </router-link>
 
       <router-link
-        v-bind:to="{name: 'edit_company', params: {company_id: company_id}}"
+        v-bind:to="{name: 'edit-company', params: {company_id: company_id}}"
         id="plus-btn" class="button is-primary is-pulled-right">
         <i class="fal fa-file-edit"></i>
       </router-link>
