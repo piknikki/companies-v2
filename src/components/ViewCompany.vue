@@ -5,7 +5,14 @@
           <h1 class="rainbow title">
             {{ name }}
           </h1>
-          <span class="tag is-medium is-pulled-right">{{ domain }}</span>
+          <span class="tag is-medium is-pulled-right">
+              <a class="nav-dots linky"
+                 variant="outline"
+                 v-bind:href=liveUrl
+              >
+                {{ liveUrl ? domain : 'liveUrl' }}
+              </a>
+          </span>
         </div>
         <p class="message-body">
           Company ID: {{ company_id }}
@@ -30,6 +37,7 @@ export default {
       domain: null,
       numberOfEmployees: null,
       subscriptionsPerEmployee: null,
+      liveUrl: '',
     };
   },
   beforeRouteEnter(to, from, next) {
@@ -49,6 +57,8 @@ export default {
             vm.numberOfEmployees = doc.data().numberOfEmployees;
             // eslint-disable-next-line no-param-reassign
             vm.subscriptionsPerEmployee = doc.data().subscriptionsPerEmployee;
+            // eslint-disable-next-line no-param-reassign
+            vm.liveUrl = doc.data().liveUrl;
           });
         });
       });
@@ -66,6 +76,7 @@ export default {
             this.domain = doc.data().domain;
             this.numberOfEmployees = doc.data().numberOfEmployees;
             this.subscriptionsPerEmployee = doc.data().subscriptionsPerEmployee;
+            this.liveUrl = doc.data().liveUrl;
           });
         },
       );

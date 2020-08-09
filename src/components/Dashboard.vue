@@ -11,7 +11,14 @@
                 <span id="icon" class="icon has-text-primary"><i class="fas fa-eye"></i></span>
               </router-link>
             </h1>
-            <span class="tag is-medium is-pulled-right">{{ company.domain }}</span>
+            <span class="tag is-medium is-pulled-right">
+              <a id="linky" class="nav-dots linky"
+                 variant="outline"
+                 v-bind:href=company.liveUrl
+              >
+                {{ company.liveUrl ? company.domain : 'liveUrl' }}
+              </a>
+          </span>
           </div>
           <p class="message-body">
             Company ID: {{ company.company_id }}
@@ -38,7 +45,7 @@ export default {
   created() {
     db.collection('companies').orderBy('company_id').get().then((querySnapshot) => {
       querySnapshot.forEach((doc) => {
-        // console.log(doc.data());
+        console.log(doc.data().liveUrl);
         const data = {
           id: doc.id,
           company_id: doc.data().company_id,
@@ -47,6 +54,7 @@ export default {
           faSymbol: doc.data().faSymbol,
           numberOfEmployees: doc.data().numberOfEmployees,
           subscriptionsPerEmployee: doc.data().subscriptionsPerEmployee,
+          liveUrl: doc.data().liveUrl,
         };
         this.companies.push(data);
       });
@@ -78,4 +86,7 @@ article {
   -webkit-text-fill-color: transparent;
 }
 
+#linky {
+  text-decoration: none;
+}
 </style>
