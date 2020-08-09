@@ -20,6 +20,8 @@
           Number of Employees: {{ numberOfEmployees }}
           <br>
           Subscriptions per Employee: {{ subscriptionsPerEmployee }}
+          <br>
+          Total subscriptions for this company: {{ totalSubs }}
         </p>
       </article>
       <router-link to="/" class="button is-success is-light">
@@ -55,6 +57,7 @@ export default {
       numberOfEmployees: null,
       subscriptionsPerEmployee: null,
       liveUrl: null,
+      totalSubscriptions: 0,
     };
   },
   beforeRouteEnter(to, from, next) {
@@ -99,7 +102,7 @@ export default {
       );
     },
     deleteCompany() {
-      // eslint-disable-next-line no-restricted-globals
+      // eslint-disable-next-line no-restricted-globals,no-alert
       if (confirm('Are you sure you want to delete this company? Like, SUPER sure??')) {
         db.collection('companies').where('company_id', '==', this.$route.params.company_id).get().then(
           (querySnapshot) => {
@@ -110,6 +113,13 @@ export default {
           },
         );
       }
+    },
+  },
+  computed: {
+    totalSubs() {
+      // eslint-disable-next-line vue/no-side-effects-in-computed-properties
+      this.totalSubscriptions = this.subscriptionsPerEmployee * this.numberOfEmployees;
+      return this.totalSubscriptions;
     },
   },
 };
@@ -125,7 +135,7 @@ article {
 }
 
 #icon {
-  padding: 0 10px;
+  padding: 0 5px;
   display: inline;
 }
 
@@ -136,5 +146,9 @@ article {
   background-size: cover;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+}
+
+#plus-btn, #delete-btn {
+  margin: 0 10px;
 }
 </style>

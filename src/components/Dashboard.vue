@@ -45,7 +45,6 @@ export default {
   created() {
     db.collection('companies').orderBy('company_id').get().then((querySnapshot) => {
       querySnapshot.forEach((doc) => {
-        console.log(doc.data().liveUrl);
         const data = {
           id: doc.id,
           company_id: doc.data().company_id,
