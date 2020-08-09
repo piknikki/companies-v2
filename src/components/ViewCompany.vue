@@ -22,6 +22,17 @@
           Subscriptions per Employee: {{ subscriptionsPerEmployee }}
         </p>
       </article>
+      <router-link to="/" class="button is-success is-light">
+        <span id="icon" class="icon has-text-primary">
+          <i class="fal fa-chevron-left"></i>
+        </span>
+      </router-link>
+
+      <button id="delete-btn"
+              @click="deleteCompany"
+              class="button is-pulled-right is-danger is-light">
+        <i class="fal fa-trash-alt"></i>
+      </button>
     </div>
 </template>
 
@@ -80,6 +91,19 @@ export default {
           });
         },
       );
+    },
+    deleteCompany() {
+      // eslint-disable-next-line no-restricted-globals
+      if (confirm('Are you sure you want to delete this company? Like, SUPER sure??')) {
+        db.collection('companies').where('company_id', '==', this.$route.params.company_id).get().then(
+          (querySnapshot) => {
+            querySnapshot.forEach((doc) => {
+              doc.ref.delete();
+              this.$router.push('/');
+            });
+          },
+        );
+      }
     },
   },
 };
