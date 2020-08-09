@@ -1,9 +1,12 @@
 <template>
   <nav class="navbar" role="navigation" aria-label="main navigation">
     <div class="navbar-brand">
-      <a class="navbar-item" href="https://bulma.io">
+      <a class="navbar-item" href="/">
         <router-link to="/" class="is-transparent">
-          <div class="title is-primary">FakeCompanies Manager</div>
+          <div class="title is-primary">
+            <img src='../../public/threebars.png' alt="logo">
+            FakeCompanies Manager
+          </div>
         </router-link>
       </a>
     </div>
