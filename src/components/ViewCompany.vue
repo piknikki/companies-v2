@@ -54,7 +54,7 @@ export default {
       domain: null,
       numberOfEmployees: null,
       subscriptionsPerEmployee: null,
-      liveUrl: '',
+      liveUrl: null,
     };
   },
   beforeRouteEnter(to, from, next) {
