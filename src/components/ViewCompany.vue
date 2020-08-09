@@ -28,6 +28,12 @@
         </span>
       </router-link>
 
+      <router-link
+        v-bind:to="{name: 'edit_company', params: {company_id: company_id}}"
+        id="plus-btn" class="button is-primary is-pulled-right">
+        <i class="fal fa-file-edit"></i>
+      </router-link>
+
       <button id="delete-btn"
               @click="deleteCompany"
               class="button is-pulled-right is-danger is-light">
