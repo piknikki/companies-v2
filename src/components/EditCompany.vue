@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>Edit Company</h1>
+    <h1 class="title">Edit Company</h1>
     <div class="container">
       <div class="columns">
         <div class="column is-half is-offset-one-quarter">
