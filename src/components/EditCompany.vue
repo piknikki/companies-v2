@@ -60,21 +60,21 @@
 </template>
 
 <script>
-import db from './firebaseInit';
+import db from './firebaseInit'
 
 export default {
   name: 'edit-company',
-  data() {
+  data () {
     return {
       company_id: null,
       name: null,
       domain: null,
       numberOfEmployees: null,
       subscriptionsPerEmployee: null,
-      liveUrl: null,
-    };
+      liveUrl: null
+    }
   },
-  beforeRouteEnter(to, from, next) {
+  beforeRouteEnter (to, from, next) {
     db.collection('companies')
       .where('company_id', '==', to.params.company_id)
       .get()
@@ -82,40 +82,40 @@ export default {
         querySnapshot.forEach((doc) => {
           next((vm) => {
             // eslint-disable-next-line no-param-reassign
-            vm.company_id = doc.data().company_id;
+            vm.company_id = doc.data().company_id
             // eslint-disable-next-line no-param-reassign
-            vm.name = doc.data().name;
+            vm.name = doc.data().name
             // eslint-disable-next-line no-param-reassign
-            vm.domain = doc.data().domain;
+            vm.domain = doc.data().domain
             // eslint-disable-next-line no-param-reassign
-            vm.numberOfEmployees = doc.data().numberOfEmployees;
+            vm.numberOfEmployees = doc.data().numberOfEmployees
             // eslint-disable-next-line no-param-reassign
-            vm.subscriptionsPerEmployee = doc.data().subscriptionsPerEmployee;
+            vm.subscriptionsPerEmployee = doc.data().subscriptionsPerEmployee
             // eslint-disable-next-line no-param-reassign
-            vm.liveUrl = doc.data().liveUrl;
-          });
-        });
-      });
+            vm.liveUrl = doc.data().liveUrl
+          })
+        })
+      })
   },
   watch: {
-    $route: 'fetchData',
+    $route: 'fetchData'
   },
   methods: {
-    fetchData() {
+    fetchData () {
       db.collection('companies').where('company_id', '==', this.$route.params.company_id).get().then(
         (querySnapshot) => {
           querySnapshot.forEach((doc) => {
-            this.company_id = doc.data().employee_id;
-            this.name = doc.data().name;
-            this.domain = doc.data().domain;
-            this.numberOfEmployees = doc.data().numberOfEmployees;
-            this.subscriptionsPerEmployee = doc.data().subscriptionsPerEmployee;
-            this.liveUrl = doc.data().liveUrl;
-          });
-        },
-      );
+            this.company_id = doc.data().employee_id
+            this.name = doc.data().name
+            this.domain = doc.data().domain
+            this.numberOfEmployees = doc.data().numberOfEmployees
+            this.subscriptionsPerEmployee = doc.data().subscriptionsPerEmployee
+            this.liveUrl = doc.data().liveUrl
+          })
+        }
+      )
     },
-    updateCompany() {
+    updateCompany () {
       db.collection('companies').where('company_id', '==', this.$route.params.company_id)
         .get().then(
           (querySnapshot) => {
@@ -126,14 +126,14 @@ export default {
                 domain: this.domain,
                 numberOfEmployees: this.numberOfEmployees,
                 subscriptionsPerEmployee: this.subscriptionsPerEmployee,
-                liveUrl: this.liveUrl,
-              });
-            });
-          },
-        );
-    },
-  },
-};
+                liveUrl: this.liveUrl
+              }).then((docRef) => this.$router.push('/'))
+            })
+          }
+        )
+    }
+  }
+}
 </script>
 
 <style scoped>

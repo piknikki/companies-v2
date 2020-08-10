@@ -60,37 +60,37 @@
 </template>
 
 <script>
-import db from './firebaseInit';
+import db from './firebaseInit'
 
 export default {
   name: 'new-company',
-  data() {
+  data () {
     return {
       company_id: null,
       name: null,
       domain: null,
       numberOfEmployees: null,
       subscriptionsPerEmployee: null,
-      liveUrl: null,
-    };
+      liveUrl: null
+    }
   },
   methods: {
-    saveCompany() {
+    saveCompany () {
       db.collection('companies').add({
         company_id: this.company_id,
         name: this.name,
         domain: this.domain,
         numberOfEmployees: this.numberOfEmployees,
         subscriptionsPerEmployee: this.subscriptionsPerEmployee,
-        liveUrl: this.liveUrl,
+        liveUrl: this.liveUrl
       })
         // eslint-disable-next-line no-unused-vars
         .then((docRef) => this.$router.push('/'))
         // eslint-disable-next-line no-console
-        .catch((error) => console.log(error));
-    },
-  },
-};
+        .catch((error) => console.log(error))
+    }
+  }
+}
 </script>
 
 <style scoped>

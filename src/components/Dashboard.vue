@@ -33,16 +33,16 @@
 </template>
 
 <script>
-import db from './firebaseInit';
+import db from './firebaseInit'
 
 export default {
   name: 'dashboard',
-  data() {
+  data () {
     return {
-      companies: [],
-    };
+      companies: []
+    }
   },
-  created() {
+  created () {
     db.collection('companies').orderBy('company_id').get().then((querySnapshot) => {
       querySnapshot.forEach((doc) => {
         const data = {
@@ -53,13 +53,13 @@ export default {
           faSymbol: doc.data().faSymbol,
           numberOfEmployees: doc.data().numberOfEmployees,
           subscriptionsPerEmployee: doc.data().subscriptionsPerEmployee,
-          liveUrl: doc.data().liveUrl,
-        };
-        this.companies.push(data);
-      });
-    });
-  },
-};
+          liveUrl: doc.data().liveUrl
+        }
+        this.companies.push(data)
+      })
+    })
+  }
+}
 </script>
 
 <style scoped>

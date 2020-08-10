@@ -45,11 +45,11 @@
 </template>
 
 <script>
-import db from './firebaseInit';
+import db from './firebaseInit'
 
 export default {
   name: 'view-company',
-  data() {
+  data () {
     return {
       company_id: null,
       name: null,
@@ -57,10 +57,10 @@ export default {
       numberOfEmployees: null,
       subscriptionsPerEmployee: null,
       liveUrl: null,
-      totalSubscriptions: 0,
-    };
+      totalSubscriptions: 0
+    }
   },
-  beforeRouteEnter(to, from, next) {
+  beforeRouteEnter (to, from, next) {
     db.collection('companies')
       .where('company_id', '==', to.params.company_id)
       .get()
@@ -68,61 +68,61 @@ export default {
         querySnapshot.forEach((doc) => {
           next((vm) => {
             // eslint-disable-next-line no-param-reassign
-            vm.company_id = doc.data().company_id;
+            vm.company_id = doc.data().company_id
             // eslint-disable-next-line no-param-reassign
-            vm.name = doc.data().name;
+            vm.name = doc.data().name
             // eslint-disable-next-line no-param-reassign
-            vm.domain = doc.data().domain;
+            vm.domain = doc.data().domain
             // eslint-disable-next-line no-param-reassign
-            vm.numberOfEmployees = doc.data().numberOfEmployees;
+            vm.numberOfEmployees = doc.data().numberOfEmployees
             // eslint-disable-next-line no-param-reassign
-            vm.subscriptionsPerEmployee = doc.data().subscriptionsPerEmployee;
+            vm.subscriptionsPerEmployee = doc.data().subscriptionsPerEmployee
             // eslint-disable-next-line no-param-reassign
-            vm.liveUrl = doc.data().liveUrl;
-          });
-        });
-      });
+            vm.liveUrl = doc.data().liveUrl
+          })
+        })
+      })
   },
   watch: {
-    $route: 'fetchData',
+    $route: 'fetchData'
   },
   methods: {
-    fetchData() {
+    fetchData () {
       db.collection('companies').where('company_id', '==', this.$route.params.company_id).get().then(
         (querySnapshot) => {
           querySnapshot.forEach((doc) => {
-            this.company_id = doc.data().employee_id;
-            this.name = doc.data().name;
-            this.domain = doc.data().domain;
-            this.numberOfEmployees = doc.data().numberOfEmployees;
-            this.subscriptionsPerEmployee = doc.data().subscriptionsPerEmployee;
-            this.liveUrl = doc.data().liveUrl;
-          });
-        },
-      );
+            this.company_id = doc.data().employee_id
+            this.name = doc.data().name
+            this.domain = doc.data().domain
+            this.numberOfEmployees = doc.data().numberOfEmployees
+            this.subscriptionsPerEmployee = doc.data().subscriptionsPerEmployee
+            this.liveUrl = doc.data().liveUrl
+          })
+        }
+      )
     },
-    deleteCompany() {
+    deleteCompany () {
       // eslint-disable-next-line no-restricted-globals,no-alert
       if (confirm('Are you sure you want to delete this company? Like, SUPER sure??')) {
         db.collection('companies').where('company_id', '==', this.$route.params.company_id).get().then(
           (querySnapshot) => {
             querySnapshot.forEach((doc) => {
-              doc.ref.delete();
-              this.$router.push('/');
-            });
-          },
-        );
+              doc.ref.delete()
+              this.$router.push('/')
+            })
+          }
+        )
       }
-    },
+    }
   },
   computed: {
-    totalSubs() {
+    totalSubs () {
       // eslint-disable-next-line vue/no-side-effects-in-computed-properties
-      this.totalSubscriptions = this.subscriptionsPerEmployee * this.numberOfEmployees;
-      return this.totalSubscriptions;
-    },
-  },
-};
+      this.totalSubscriptions = this.subscriptionsPerEmployee * this.numberOfEmployees
+      return this.totalSubscriptions
+    }
+  }
+}
 </script>
 
 <style scoped>
